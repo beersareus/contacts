@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row row-content" ng-controller="DishDetailController">
+        <div class="col-xs-12" ng-if="!showDish">
+            <h3>{{message}}</h3>
+        </div>
+        <div class="col-xs-12" ng-if="showDish">
+            <button class="btn btn-xs btn-primary pull-right" type="button" ui-sref="app.menu">
+                    Back to Menu
+                </button>
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object img-thumbnail" ng-src={{dish.image}} alt={{dish.name}}>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h2 class="media-heading">{{dish.name}}
+                               <span class="label label-danger">{{dish.label}}</span>
+                               <span class="badge">{{dish.price | currency}}</span></h2>
+                    <p>{{dish.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-9 col-xs-offset-1">
+            <div>
+                <p class="commentStyle"><b> Customer comments </b> <span class="sortStyle"> Sort by: </span> <input type="text" ng-model="display" placeholder="author/rating/date"> </p>
+            </div>
+            <p style="padding:10px;"></p>
+            <ul class="list-unstyled">
+                <li ng-repeat="comment in dish.comments | orderBy:display">
+                    <blockquote class="blockquote">
+                        <p style="padding:5px;"></p>
+                        <p>{{comment.rating}} Stars</p>
+                        <p>{{comment.comment}}</p>
+                        <footer class="blockquote-footer"> <span>{{comment.author}}</span>,<span>{{comment.date | date }}</span></footer>
+                    </blockquote>
+                </li>
+            </ul>
+        </div>
+        <!-- DishCommentController--------------------------------------------------------------------->
+        <div class="col-xs-9 col-xs-offset-1" ng-controller="DishCommentController">
+            <ul class="list-unstyled">
+                <div ng-if="commentForm.$valid && !commentForm.$pristine">
+                    <blockquote class="blockquote">
+                        <p style="padding:5px;"></p>
+                        <p>{{comments.rating}} Stars</p>
+                        <p>{{comments.comment}}</p>
+                        <footer class="blockquote-footer"> <span>{{comments.author}}</span></footer>
+                    </blockquote>
+                </div>
+            </ul>
+            <form class="form-horizontal" name="commentForm" ng-submit="submitComment()" novalidate>
+                <div class="form-group" ng-class="{ 'has-error' : commentForm.author.$error.required && !commentForm.author.$pristine }">
+                    <label for="author" class="col-sm-2 control-label">Your Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="author" name="author" ng-model="mycomment.author" ng-required="true" ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Enter Your Name">
+                        <span ng-show="commentForm.author.$error.required && !commentForm.author.$pristine" class="help-block">Your name is required.</span>
+                        <span ng-show="commentForm.author.$error.pattern && !commentForm.author.$pristine" class="help-block">No numbers please</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rating" class="col-sm-2 control-label">Number of Stars</label>
+                    <div class="col-sm-10">
+                        <label ng-repeat="n in [1,2,3,4,5]">
+                                <label class="radio-inline">
+                                <span>&nbsp;<input type="radio" name="rating" id="rating" ng-model="mycomment.rating" ng-value="n">{{n}}</label>&nbsp;</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : commentForm.comment.$error.required && !commentForm.comment.$pristine }">
+                    <label for="feedback" class="col-sm-2 control-label">Your Comments</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="12" name="comment" ng-model="mycomment.comment" ng-required="true"> </textarea>
+                        <span ng-show="commentForm.comment.$error.required && !commentForm.comment.$pristine" class="help-block">Your comments are required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary" ng-disabled="commentForm.$invalid">Send Feedback</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+npm install -g grunt-cli
+npm install grunt --save-dev
+npm install -g grunt-init
+
+npm install grunt-contrib-jshint --save-dev
+npm install grunt-contrib-watch --save-dev
+
+grunt jshint
+
+
+
+
+# custom tasks
+grunt.registerTask('my-task', 'My custom task.', function() {
+    grunt.log.writeln('This is my custom task.');
+});
+
+$ grunt my-task

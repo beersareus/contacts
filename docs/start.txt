@@ -1,0 +1,12 @@
+npm init  # create a local package.json file to manage Node.js dependencies
+create app.js
+
+bower init
+bower install jquery --save
+bower install bootstrap --save
+
+
+
+# testing
+npm install jasmine-core --save-dev
+bower install angular-mocks -S

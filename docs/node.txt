@@ -1,0 +1,13 @@
+npm update -g
+
+npm init  # create a local package.json file to manage Node.js dependencies
+
+npm install -g bower
+npm install -g grunt-cli
+npm install grunt --save-dev
+
+# testing
+npm install jasmine-core --save-dev
+npm install karma-cli -g
+npm install karma-jasmine --save-dev
+npm install phantomjs karma-phantomjs-launcher karma-chrome-launcher --save-dev

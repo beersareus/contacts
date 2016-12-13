@@ -1,0 +1,28 @@
+beersareus plfflp@9
+ cd c:backup/lib/dev
+
+git config --list
+git config --global user.name "fraz"
+git config --global user.email "paulkf@me.com"
+
+git status
+git log
+
+git init  # initialise a new git repository
+$ git clone https://github.com/beersareus/dev.git
+
+git add index.html    # add file to git's database or 'git add .'  or 'git add --all'
+git commit --message "can be abreviated to -m"
+git commit -am "just backingup"
+git push origin master
+git push origin --all
+git push --all
+git pull --all
+
+git rm deleteme.txt   #restaged - need to commit
+git mv old.file new.file
+
+git branch    #list branches
+git branch draft  # new branch called draft with the current commit image
+git checkout tmp  #change branches
+git checkout -b tmp #checkout and create a new branch at same time
