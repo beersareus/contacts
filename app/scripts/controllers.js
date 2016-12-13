@@ -41,7 +41,7 @@ angular.module('confusionApp')
 		};
 	}])
 
-.controller('ContactController', ['$scope', function($scope) {
+.controller('ContactsController', ['$scope', function($scope) {
 
 	$scope.feedback = {
 		mychannel: "",
@@ -175,15 +175,6 @@ angular.module('confusionApp')
 		);
 }])
 
-.controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
-	$scope.leadership = corporateFactory.getLeadership().query()
-		.$promise.then(
-			function(response) {
-				$scope.leadership = response;
-				$scope.showDish = true;
-			},
-			function(response) {
-				$scope.message = "Error: " + response.status + " " + response.statusText;
-			}
-		);
+.controller('HelpController', ['$scope', function($scope) {
+	$scope.mydate = new Date().toISOString();
 }]);

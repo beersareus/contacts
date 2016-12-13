@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('confusionApp', ['ui.router', 'ngResource'])
+angular.module('contacts', ['ui.router', 'ngResource'])
 	.config(function($stateProvider, $urlRouterProvider) {
 		$stateProvider
 
@@ -18,44 +18,27 @@ angular.module('confusionApp', ['ui.router', 'ngResource'])
 				'footer': {
 					templateUrl: 'views/footer.html',
 				}
-			},
-			params: {
-				default_menuItem: 0,
-				default_promotion: 0,
-				default_chief: 3
 			}
-
 		})
 
-		// route for the aboutus page
-		.state('app.aboutus', {
-			url: 'aboutus',
+		// route for the contacts page
+		.state('app.contacts', {
+			url: 'contacts',
 			views: {
 				'content@': {
-					templateUrl: 'views/aboutus.html',
-					controller: 'AboutController'
+					templateUrl: 'views/contacts.html',
+					controller: 'ContactsController'
 				}
 			}
 		})
 
-		// route for the contactus page
-		.state('app.contactus', {
-			url: 'contactus',
+		// route for the help page
+		.state('app.help', {
+			url: 'help',
 			views: {
 				'content@': {
-					templateUrl: 'views/contactus.html',
-					controller: 'ContactController'
-				}
-			}
-		})
-
-		// route for the menu page
-		.state('app.menu', {
-			url: 'menu',
-			views: {
-				'content@': {
-					templateUrl: 'views/menu.html',
-					controller: 'MenuController'
+					templateUrl: 'views/help.html',
+					controller: 'HelpController'
 				}
 			}
 		})
