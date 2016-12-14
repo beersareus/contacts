@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('confusionApp')
+angular.module('contacts')
 	.constant("baseURL", "http://localhost:3000/")
 	.service('menuFactory', ['$resource', 'baseURL', function($resource, baseURL) {
 

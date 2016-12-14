@@ -1,70 +1,30 @@
 'use strict';
 
-angular.module('confusionApp')
-	.controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
-
-		$scope.tab = 1;
-		$scope.filtText = '';
-		$scope.showDetails = false;
-
-		$scope.showMenu = false;
-		$scope.message = "Loading ...";
-		menuFactory.getDishes().query(
-			function(response) {
-				$scope.dishes = response;
-				$scope.showMenu = true;
-			},
-			function(response) {
-				$scope.message = "Error: " + response.status + " " + response.statusText;
-			});
-
-		$scope.select = function(setTab) {
-			$scope.tab = setTab;
-
-			if (setTab === 2) {
-				$scope.filtText = "appetizer";
-			} else if (setTab === 3) {
-				$scope.filtText = "mains";
-			} else if (setTab === 4) {
-				$scope.filtText = "dessert";
-			} else {
-				$scope.filtText = "";
-			}
+angular.module('contacts')
+	.controller('ContactsControllerSetup', ['$scope', function($scope) {
+		$scope.feedback = {
+			mychannel: "",
+			firstName: "",
+			lastName: "",
+			agree: false,
+			email: ""
 		};
 
-		$scope.isSelected = function(checkTab) {
-			return ($scope.tab === checkTab);
-		};
+		var channels = [{
+			value: "tel",
+			label: "Tel."
+		}, {
+			value: "Email",
+			label: "Email"
+		}];
 
-		$scope.toggleDetails = function() {
-			$scope.showDetails = !$scope.showDetails;
-		};
+		$scope.channels = channels;
+		$scope.invalidChannelSelection = false;
+
 	}])
 
-.controller('ContactsController', ['$scope', function($scope) {
+.controller('ContactsController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
 
-	$scope.feedback = {
-		mychannel: "",
-		firstName: "",
-		lastName: "",
-		agree: false,
-		email: ""
-	};
-
-	var channels = [{
-		value: "tel",
-		label: "Tel."
-	}, {
-		value: "Email",
-		label: "Email"
-	}];
-
-	$scope.channels = channels;
-	$scope.invalidChannelSelection = false;
-
-}])
-
-.controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
 	$scope.sendFeedback = function() {
 		if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
 			$scope.invalidChannelSelection = true;
@@ -79,7 +39,7 @@ angular.module('confusionApp')
 				email: ""
 			};
 			$scope.feedback.mychannel = "";
-			$scope.feedbackForm.$setPristine();
+			$scope.contactsForm.$setPristine();
 		}
 	};
 }])
