@@ -42,6 +42,17 @@ angular.module('contacts', ['ui.router', 'ngResource'])
 				}
 			}
 		})
+		
+		// route for wip
+		.state('app.wip', {
+			url: 'wip',
+			views: {
+				'content@': {
+					templateUrl: 'views/wip.html',
+					controller: 'ContactsController'
+				}
+			}
+		})
 
 		// route for the dishdetail page
 		.state('app.dishdetails', {
