@@ -1,5 +1,0 @@
-bower install
-npm install
-npm install json-server -g
-
-node skeleton.js
