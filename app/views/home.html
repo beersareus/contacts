@@ -1,0 +1,30 @@
+<div class="container" ng-controller="ContactsController">
+    <div ng-if="!showDish">
+        <h3>{{message}}</h3>
+    </div>
+
+    <!-- list  -------------------------------------------------------------------->
+    <div class="row">
+        <div class="col-xs-12 ">
+            <p style="padding:20px;"></p>
+            <h3 align=center>All Contacts</h3>
+        </div>
+    </div>
+    <div class="row row-content">
+        <div class="col-xs-12">
+            <ul class="list-unstyled">
+                <li ng-repeat="contact in contacts | orderBy:contacts.namel">
+                    <blockquote class="blockquote">
+                        <p style="padding:5px;"></p>
+                        <p>{{contact.namef}}</p>
+                        <p>{{contact.namel}}</p>
+                        <footer class="blockquote-footer"> <span>{{contact.namel}}</span>,<span>{{contact.id}}</span>
+                            <button type="button" class="btn btn-danger" ng-click="deleteContact(contact.id)">Delete</button>
+
+                        </footer>
+                    </blockquote>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
