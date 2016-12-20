@@ -1,5 +1,5 @@
 beersareus plfflp@9
- cd c:backup/lib/dev
+ cd c:backup/lib/contacts
 
 git config --list
 git config --global user.name "fraz"
@@ -12,7 +12,7 @@ git log --oneline
 git init  # initialise a new git repository
 $ git clone https://github.com/beersareus/dev.git
 
-git add index.html    # add file to git's database 
+git add index.html    # add file to git's database
 git add .	# do from root to add all subdirectories
 git add --all
 git add -A ##############stages All
@@ -32,21 +32,21 @@ git checkout tmp  #change branches
 git checkout -b tmp #checkout and create a new branch at same time
 
 # time travel
-# Checking out an old commit is a read-only operation. It’s impossible to harm your repository 
+# Checking out an old commit is a read-only operation. It’s impossible to harm your repository
 # while viewing an old revision. Nothing you do in here will be saved in your repository
 # can checkout a file which does make changes
 
 git checkout a1e8fb5
 
 
-# git revert command undoes a committed snapshot. But, instead of removing the commit from the 
-# project history, it figures out how to undo the changes introduced by the commit and appends 
+# git revert command undoes a committed snapshot. But, instead of removing the commit from the
+# project history, it figures out how to undo the changes introduced by the commit and appends
 # a new commit with the resulting content. undoes a single commit
 
 git revert <commit>
 
-# When you undo with git reset(and the commits are no longer referenced by any ref or the reflog), 
-# there is no way to retrieve the original copy—it is a permanent undo,  it should only be used to 
+# When you undo with git reset(and the commits are no longer referenced by any ref or the reflog),
+# there is no way to retrieve the original copy—it is a permanent undo,  it should only be used to
 # undo local changes
 
 git reset HEAD~2   #command moves the current branch backward by two commits, effectively removing the two snapshots
@@ -55,8 +55,8 @@ git reset <commit>	#Move the current branch tip backward to <commit>, reset the 
 git reset --hard <commit>	#Move the current branch tip backward to <commit> and reset both the staging area and the working directory to match. This obliterates not only the uncommitted changes, but all commits after <commit>, as well.
 
 # The git clean command removes untracked files from your working directory, not undoable
-# The git clean command is often executed in conjunction with git reset --hard. Remember that resetting only 
-# affects tracked files, so a separate command is required for cleaning up untracked ones. Combined, these two 
+# The git clean command is often executed in conjunction with git reset --hard. Remember that resetting only
+# affects tracked files, so a separate command is required for cleaning up untracked ones. Combined, these two
 # commands let you return the working directory to the exact state of a particular commit.
 
 git clean -n	#dry run
@@ -65,4 +65,3 @@ git clean -df	#Remove untracked files and untracked directories from the current
 
 # use git reset --hard and git clean -f commands in your local repository to completely remove, match the most recent commit, giving you a clean slate to work with.
 # https://www.atlassian.com/git/tutorials/undoing-changes/git-clean
-

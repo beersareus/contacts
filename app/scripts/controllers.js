@@ -18,32 +18,28 @@ angular.module('contacts')
 			label: "Email"
 		}];
 
+		$scope.titles = ['Mr', 'Mrs', 'Miss']
+
 		$scope.channels = channels;
 		$scope.invalidChannelSelection = false;
 
 	}])
 
-.controller('ContactsController', ['$scope', '$stateParams', 'feedbackFactory', 'contactFactory', function($scope, $stateParams, feedbackFactory, contactFactory) {
-	$scope.ok = false;
-	$scope.sendFeedback = function() {
-		if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
-			$scope.invalidChannelSelection = true;
-		} else {
-			feedbackFactory.getFeedback().save($scope.feedback);
-			$scope.invalidChannelSelection = false;
-			$scope.feedback = {
-				mychannel: "",
-				firstName: "",
-				lastName: "",
-				agree: false,
-				email: ""
-			};
-			$scope.feedback.mychannel = "";
-			$scope.contactsForm.$setPristine();
-		}
-	};
+.controller('ContactsController', ['$scope', '$state', 'contactFactory', function($scope, $state, contactFactory) {
+	$scope.isok = false;
 
-	$scope.saveContact = function() {
+	contactFactory.contact().query()
+		.$promise.then(
+			function(response) {
+				$scope.contacts = response;
+				//$scope.ok = true;
+			},
+			function(response) {
+				$scope.message = "Error: " + response.status + " " + response.statusText;
+			}
+		);
+
+	$scope.createContact = function() {
 		contactFactory.contact().create($scope.contact);
 		$scope.contact = {
 			title: "",
@@ -53,22 +49,22 @@ angular.module('contacts')
 		$scope.contactsForm.$setPristine();
 	};
 
-	contactFactory.contact().query()
-		.$promise.then(
-			function(response) {
-				$scope.contacts = response;
-				$scope.ok = true;
-			},
-			function(response) {
-				$scope.message = "Error: " + response.status + " " + response.statusText;
-			}
-		);
-
 	$scope.deleteContact = function(id) {
-		contactFactory.contact().delete({
-			id: id
-		});
+		contactFactory.del().delete({
+				id: id
+			})
+			.$promise.then(
+				function(response) {
+					$scope.isok = true;
+					$state.reload();
+				},
+				function(response) {
+					$scope.isok = false;
+					$scope.message = "Error: " + response.status + " " + response.statusText;
+				}
+			);
 	};
+
 
 }])
 

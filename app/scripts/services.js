@@ -70,12 +70,17 @@ angular.module('contacts')
 					id: '@id'
 				}
 			},
+		});
+	};
+
+	this.del = function() {
+		return $resource(baseURL + "contacts/:id", null, {
 			'delete': {
 				method: 'DELETE',
 				params: {
-					id: '@id'
+					id: 'id'
 				}
-			},
+			}
 		});
 	};
 
