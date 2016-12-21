@@ -28,29 +28,19 @@ angular.module('contacts')
 .controller('ContactsController', ['$scope', '$state', 'contactFactory', function($scope, $state, contactFactory) {
 	$scope.isok = false;
 
-	contactFactory.contact().query()
+	contactFactory.contacts().query()
 		.$promise.then(
 			function(response) {
-				$scope.contacts = response;
-				//$scope.ok = true;
+				$scope.dataset = response;
+				$scope.ok = true;
 			},
 			function(response) {
 				$scope.message = "Error: " + response.status + " " + response.statusText;
 			}
 		);
 
-	$scope.createContact = function() {
-		contactFactory.contact().create($scope.contact);
-		$scope.contact = {
-			title: "",
-			namef: "",
-			namel: ""
-		};
-		$scope.contactsForm.$setPristine();
-	};
-
 	$scope.deleteContact = function(id) {
-		contactFactory.del().delete({
+		contactFactory.contact().delete({
 				id: id
 			})
 			.$promise.then(
@@ -59,14 +49,68 @@ angular.module('contacts')
 					$state.reload();
 				},
 				function(response) {
-					$scope.isok = false;
 					$scope.message = "Error: " + response.status + " " + response.statusText;
 				}
 			);
 	};
 
-
 }])
+
+.controller('NewController', ['$scope', 'contactFactory', function($scope, contactFactory) {
+	$scope.titles = ['Mr', 'Mrs', 'Miss'];
+	$scope.isok = false;
+	$scope.createContact = function() {
+		contactFactory.contacts().create($scope.contact)
+			.$promise.then(
+				function(response) {
+					$scope.isok = true;
+					$scope.contact = {
+						title: "",
+						namef: "",
+						namel: ""
+					};
+					$scope.contactsForm.$setPristine();
+				},
+				function(response) {
+					$scope.message = "Error: " + response.status + " " + response.statusText;
+				}
+			);
+	};
+}])
+
+.controller('EditController', ['$scope', '$stateParams', 'contactFactory', function($scope, $stateParams, contactFactory) {
+	$scope.titles = ['Mr', 'Mrs', 'Miss'];
+	$scope.isok = false;
+	$scope.contact = contactFactory.contact().get({
+			id: parseInt($stateParams.id, 10)
+		})
+		.$promise.then(
+			function(response) {
+				$scope.contact = response;
+				$scope.isok = true;
+			},
+			function(response) {
+				$scope.message = "Error: " + response.status + " " + response.statusText;
+			}
+		);
+
+	$scope.updateContact = function(id) {
+		contactFactory.contact().update({
+				id: $scope.contact.id
+			}, $scope.contact)
+			.$promise.then(
+				function(response) {
+					$scope.contactsForm.$setPristine();
+					$scope.isok = true;
+				},
+				function(response) {
+					$scope.message = "Error: " + response.status + " " + response.statusText;
+				}
+			);
+	};
+}])
+
+
 
 .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
 

@@ -15,3 +15,18 @@ $scope.xx = function(id) {
 			}
 		);
 };
+
+///////////////////////////////
+<
+button ng - click = "toggleDetails()"
+class = "btn btn-xs btn-primary pull-right"
+type = "button" > {
+		{
+			showDetails ? 'Hide Details' : 'Show Details'
+		}
+	} <
+	/button>
+$scope.toggleDetails = function() {
+	$scope.showDetails = !$scope.showDetails;
+};
+//////////////////////////////

@@ -52,31 +52,34 @@ angular.module('contacts')
 }])
 
 .service('contactFactory', ['$resource', 'baseURL', function($resource, baseURL) {
-	this.contact = function() {
+	this.contacts = function() {
 		return $resource(baseURL + "contacts/", null, {
 			'create': {
 				method: 'POST'
-			},
-			'get': {
-				method: 'GET'
 			},
 			'query': {
 				method: 'GET',
 				isArray: true
 			},
-			'update': {
-				method: 'PUT',
-				params: {
-					id: '@id'
-				}
-			},
 		});
 	};
 
-	this.del = function() {
+	this.contact = function() {
 		return $resource(baseURL + "contacts/:id", null, {
 			'delete': {
 				method: 'DELETE',
+				params: {
+					id: 'id'
+				}
+			},
+			'get': {
+				method: 'GET',
+				params: {
+					id: 'id'
+				}
+			},
+			'update': {
+				method: 'PUT',
 				params: {
 					id: 'id'
 				}

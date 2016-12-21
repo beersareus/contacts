@@ -38,7 +38,7 @@ angular.module('contacts', ['ui.router', 'ngResource'])
 			views: {
 				'content@': {
 					templateUrl: 'views/new.html',
-					controller: 'ContactsController'
+					controller: 'NewController'
 				}
 			}
 		})
@@ -57,11 +57,11 @@ angular.module('contacts', ['ui.router', 'ngResource'])
 
 		// route for wip
 		.state('app.wip', {
-			url: 'wip',
+			url: 'wip/:id',
 			views: {
 				'content@': {
 					templateUrl: 'views/wip.html',
-					controller: 'ContactsController'
+					controller: 'EditController'
 				}
 			}
 		})
