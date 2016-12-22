@@ -15,13 +15,26 @@
     <div class="row row-content">
         <div class="col-md-8">
             <form class="form-horizontal" name="contactsForm" ng-submit="createContact()" novalidate>
+                <!----------------------------------------------------------------->
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <span class="label label-info" ng-model="contact.id">Id</span>
+                    </div>
+                    <div class="col-sm-4">
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="form-check-label"><input class="form-check-input" type="checkbox" value="" ng-model="contact.active"> Active </label>
+                    </div>
+                </div>
+                <!--------------------------------------------------------------->
                 <div class="form-group row">
                     <div class="col-sm-2">
                         <select class="form-control" ng-model="contact.title">
                         <option ng-repeat="title in titles" value = {{title}} label = {{title}}></option>
                         </select>
                     </div>
-
                     <div class="col-sm-4">
                         <input type="text" class="form-control col-sm-3" id="namef" name="namef" placeholder="Enter First Name" align ng-model="contact.namef" required>
                     </div>
@@ -32,11 +45,43 @@
                         <input type="text" class="form-control col-sm-3" id="namel" name="namel" placeholder="Enter Last Name" ng-model="contact.namel" required>
                     </div>
                 </div>
+                <!---------------------------------------------------------------->
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <span class="label label-default">Job Title</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control col-sm-3" id="jobtitle" name="jobtitle" placeholder="Job Title" align ng-model="contact.jobtitle">
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="label label-default">Company</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control col-sm-3" id="company" name="company" placeholder="Company" ng-model="contact.company">
+                    </div>
+                </div>
+                <!----------------------------------------------------------------->
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <span class="label label-default">Job Title</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control col-sm-3" id="jobtitle" name="jobtitle" placeholder="Job Title" align ng-model="contact.jobtitle">
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="label label-default">Company</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control col-sm-3" id="company" name="company" placeholder="Company" ng-model="contact.company">
+                    </div>
+                </div>
+                <!----------------------------------------------------------------->
                 <div class="form-group row">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary" ng-disabled="contactsForm.$invalid">Save</button>
                     </div>
                 </div>
+                <!------------------------------------------------------------------->
                 <div class="form-group row">
                     <span ng-show="contactsForm.namef.$invalid && !contactsForm.namef.$pristine" class="help-block">Your First name is required.</span>
                 </div>
@@ -44,10 +89,13 @@
         </div>
         <div class- "col-md-4">
             <h3>Your Current Feedback:</h3>
+            <p>{{contact.active}}</p>
             <p>{{contact.title}}{{contact.namef}} {{contact.namel | uppercase }}</p>
+            <p>{{contact.jobtitle}}{{contact.company}} </p>
         </div>
 
     </div>
+    <!-------------------------------------------------------------------->
 
     <div class="row row-content" ng-controller="ContactsController">
         <span ng-show="contactsForm.firstname.$invalid && !contactsForm.firstname.$pristine" class="help-block">Your first name is required.</span>
@@ -145,6 +193,9 @@ v>
 
 </div>
 v>
+
+</div>
+v> v> v>
 
 </div>
 v>

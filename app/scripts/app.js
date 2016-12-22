@@ -21,24 +21,24 @@ angular.module('contacts', ['ui.router', 'ngResource'])
 			}
 		})
 
-		// route for the contacts page
-		.state('app.contacts', {
-			url: 'contacts',
-			views: {
-				'content@': {
-					templateUrl: 'views/contacts.html',
-					controller: 'ContactsController'
-				}
-			}
-		})
-
-		// route for the contacts page
+		// route for the new page
 		.state('app.new', {
 			url: 'new',
 			views: {
 				'content@': {
 					templateUrl: 'views/new.html',
 					controller: 'NewController'
+				}
+			}
+		})
+
+		// route for the edit page
+		.state('app.edit', {
+			url: 'edit/:id',
+			views: {
+				'content@': {
+					templateUrl: 'views/edit.html',
+					controller: 'EditController'
 				}
 			}
 		})
