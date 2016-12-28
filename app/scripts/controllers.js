@@ -35,6 +35,8 @@ angular.module('contacts')
 
 .controller('NewController', ['$scope', 'contactFactory', function($scope, contactFactory) {
 	$scope.titles = ['Mr', 'Mrs', 'Miss'];
+	$scope.states = ['NSW', 'VIC', 'QLD','ACT','TAS','NT','SA','WA'];
+	$scope.categories = ['Family', 'Work', 'Professional','Career'];
 	$scope.isok = false;
 	$scope.createContact = function() {
 		contactFactory.contacts().create($scope.contact)
@@ -42,9 +44,19 @@ angular.module('contacts')
 				function(response) {
 					$scope.isok = true;
 					$scope.contact = {
+						active: false,
 						title: "",
 						namef: "",
-						namel: ""
+						namel: "",
+						jobtitle: "",
+						company: "",
+						address1: "",
+						address2: "",
+						suburb: "",
+						state: "",
+						pcode: "",
+						category: "",
+						phoneh: ""
 					};
 					$scope.contactsForm.$setPristine();
 				},
