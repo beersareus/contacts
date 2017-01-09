@@ -2,34 +2,33 @@
 
 
     <!-- list  -------------------------------------------------------------------->
-    <div class="row">
-        <div class="col-xs-12 ">
-            <p style="padding:20px;"></p>
-            <h3 align=center>All Contacts</h3>
-            <div class="col-xs-12" ng-if="!isok">
-                <h3>{{message}}</h3>
-            </div>
-        </div>
-    </div>
     <div class="row row-content">
         <div class="col-xs-12">
             <div class="table-responsive">
-                <table class="table">
-                    <caption>Responsive Table Layout</caption>
+                <table class="table table-condensed table-striped table-hover table-inverse" ">
+
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>Company</th>
+                            <th>Birthday</th>
+                            <th>Next Call</th>
                             <th>Delete</th>
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="contact in dataset | orderBy:dataset.namel">
+                        <tr ng-repeat="contact in dataset | orderBy:dataset.namel ">
                             <td>{{contact.id}}</td>
                             <td>{{contact.title}}&nbsp{{contact.namef}}&nbsp{{contact.namel}}</td>
-                            <td><button type="button" class="btn btn-xs btn-danger" ng-click="deleteContact(contact.id)"> <span class="glyphicon glyphicon-trash"></span></button></td>
+                            <td>{{contact.company}}</td>
+                            <td>{{contact.birthday | date}}</td>
+                            <td>{{contact.nextcall | date}}</td>
+                            <td><button type="button " class="btn btn-xs btn-danger " ng-click="deleteContact(contact.id) "> <span class="glyphicon glyphicon-trash "></span></button></td>
                             <td>
-                                <a ui-sref="app.edit({id:contact.id})">Edit</td>
+                              <button type="button " class="btn btn-xs btn-success " <a ui-sref="app.edit({id:contact.id}) "><span class="glyphicon glyphicon-edit "></span></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

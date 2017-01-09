@@ -4,7 +4,6 @@ angular.module('contacts')
 
 .controller('ContactsController', ['$scope', '$state', 'contactFactory', function($scope, $state, contactFactory) {
 	$scope.isok = false;
-
 	contactFactory.contacts().query()
 		.$promise.then(
 			function(response) {
@@ -35,16 +34,19 @@ angular.module('contacts')
 
 .controller('NewController', ['$scope', 'contactFactory', function($scope, contactFactory) {
 	$scope.titles = ['Mr', 'Mrs', 'Miss'];
-	$scope.states = ['NSW', 'VIC', 'QLD','ACT','TAS','NT','SA','WA'];
-	$scope.categories = ['Family', 'Work', 'Professional','Career'];
+	$scope.states = ['NSW', 'VIC', 'QLD', 'ACT', 'TAS', 'NT', 'SA', 'WA'];
+	$scope.categories = ['Family', 'Work', 'Professional', 'Career'];
 	$scope.isok = false;
+	$scope.contact = {};
+	$scope.contact.active = true;
+	$scope.contact.date_edit = new Date().toISOString();
 	$scope.createContact = function() {
 		contactFactory.contacts().create($scope.contact)
 			.$promise.then(
 				function(response) {
 					$scope.isok = true;
 					$scope.contact = {
-						active: false,
+						active: true,
 						title: "",
 						namef: "",
 						namel: "",
@@ -56,7 +58,15 @@ angular.module('contacts')
 						state: "",
 						pcode: "",
 						category: "",
-						phoneh: ""
+						phoneh: "",
+						phonew: "",
+						phonem: "",
+						birthday: null,
+						nextcall: null,
+						email: "",
+						product: "",
+						family: "",
+						comments: ""
 					};
 					$scope.contactsForm.$setPristine();
 				},
@@ -69,7 +79,10 @@ angular.module('contacts')
 
 .controller('EditController', ['$scope', '$stateParams', 'contactFactory', function($scope, $stateParams, contactFactory) {
 	$scope.titles = ['Mr', 'Mrs', 'Miss'];
+	$scope.states = ['NSW', 'VIC', 'QLD', 'ACT', 'TAS', 'NT', 'SA', 'WA'];
+	$scope.categories = ['Family', 'Work', 'Professional', 'Career'];
 	$scope.isok = false;
+
 	$scope.contact = contactFactory.contact().get({
 			id: parseInt($stateParams.id, 10)
 		})
@@ -77,6 +90,8 @@ angular.module('contacts')
 			function(response) {
 				$scope.contact = response;
 				$scope.isok = true;
+				$scope.contact.birthday = new Date($scope.contact.birthday).toISOString().substring(0, 10);
+				$scope.contact.nextcall = new Date($scope.contact.nextcall).toISOString().substring(0, 10);
 			},
 			function(response) {
 				$scope.message = "Error: " + response.status + " " + response.statusText;

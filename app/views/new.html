@@ -1,17 +1,4 @@
 <div class="container" ng-app="contacts" ng-controller="NewController">
-    <div class="row">
-        <div class="col-xs-12">
-            <ul class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li class="active">New</li>
-            </ul>
-        </div>
-        <div class="col-xs-12">
-            <h3>New Contact</h3>
-            <hr>
-        </div>
-    </div>
-
     <div class="row row-content">
         <div class="col-md-8">
             <form class="form-horizontal" name="contactsForm" ng-submit="createContact()" novalidate>
@@ -25,7 +12,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-4">
-                        <label class="form-check-label"><input class="form-check-input" type="checkbox" value="" ng-model="contact.active"> Active </label>
+                        <label class="form-check-label active"><input class="form-check-input" type="checkbox" checked disabled ng-model="contact.active"> Active </label>
                     </div>
                 </div>
                 <!--------------------------------------------------------------->
@@ -117,26 +104,51 @@
                     </div>
                 </div>
                 <!----------------------------------------------------------------->
-                <div class="form-group row">
+                <div class="form-group row has-feedback">
                     <div class="col-sm-2">
-					<label for="birthday" class="col-form-label">Birthday</label>
+                        <label for="birthday" class="col-form-label">Birthday</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="birthday" name="birthday" ng-model="contact.birthday">
+                        <input type="date" class="form-control" id="birthday" name="birthday" ng-model="contact.birthday" /> <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
                     </div>
                     <div class="col-sm-2">
-					<label for="nextcall" class="col-form-label">Next Call</label>
+                        <label for="nextcall" class="col-form-label">Next Call</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="date" class="form-control" id="nextcall" name="nextcall" ng-model="contact.nextcall">
+                        <input type="date" class="form-control" id="nextcall" name="nextcall" ng-model="contact.nextcall" /> <i class="glyphicon glyphicon-calendar form-control-feedback"></i>
                     </div>
                 </div>
                 <!----------------------------------------------------------------->
-				<div class="form-group row">
+                <div class="form-group row">
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" ng-model="contact.email">
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" ng-model="contact.email">
+                    </div>
+                </div>
+                <!----------------------------------------------------------------->
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="product" name="product" placeholder="Product" ng-model="contact.product">
+                    </div>
+                </div>
+                <!----------------------------------------------------------------->
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="family" name="family" placeholder="Family" ng-model="contact.family">
+                    </div>
+                </div>
+                <!----------------------------------------------------------------->
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <label for="comments" class="control-label">Comments</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" rows="12" ng-model="contact.comments"> </textarea>
                     </div>
                 </div>
                 <!----------------------------------------------------------------->
@@ -160,8 +172,11 @@
             <p>{{contact.suburb}} {{contact.state}} {{contact.pcode}}</p>
             <p>{{contact.category}}{{contact.phoneh}} </p>
             <p>{{contact.phonew}}{{contact.phonem}} </p>
-			<p>{{contact.birthday}}{{contact.nextcall}} </p>
-			<p>{{contact.email}} </p>
+            <p>{{contact.birthday}}{{contact.nextcall}} </p>
+            <p>{{contact.email}} </p>
+            <p>{{contact.product}} </p>
+            <p>{{contact.family}} </p>
+            <p>{{contact.notes}} </p>
         </div>
 
     </div>
