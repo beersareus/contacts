@@ -4,6 +4,7 @@ angular.module('contacts')
 
 .controller('ContactsController', ['$scope', '$state', 'contactFactory', function($scope, $state, contactFactory) {
 	$scope.isok = false;
+
 	contactFactory.contacts().query()
 		.$promise.then(
 			function(response) {
@@ -82,6 +83,7 @@ angular.module('contacts')
 	$scope.states = ['NSW', 'VIC', 'QLD', 'ACT', 'TAS', 'NT', 'SA', 'WA'];
 	$scope.categories = ['Family', 'Work', 'Professional', 'Career'];
 	$scope.isok = false;
+	//$scope.dateType = "date";
 
 	$scope.contact = contactFactory.contact().get({
 			id: parseInt($stateParams.id, 10)
@@ -90,8 +92,8 @@ angular.module('contacts')
 			function(response) {
 				$scope.contact = response;
 				$scope.isok = true;
-				$scope.contact.birthday = new Date($scope.contact.birthday).toISOString().substring(0, 10);
-				$scope.contact.nextcall = new Date($scope.contact.nextcall).toISOString().substring(0, 10);
+				$scope.contact.birthday = new Date($scope.contact.birthday);
+				$scope.contact.nextcall = new Date($scope.contact.nextcall);
 			},
 			function(response) {
 				$scope.message = "Error: " + response.status + " " + response.statusText;
